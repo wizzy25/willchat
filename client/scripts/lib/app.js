@@ -1,8 +1,8 @@
-'use strict'
 
 // Libs
 import 'angular-animate'
 import 'angular-meteor'
+import 'angular-moment'
 import 'angular-sanitize'
 import 'angular-ui-router'
 import 'ionic-scripts'
@@ -11,8 +11,10 @@ import Loader from 'angular-ecmascript/module-loader'
 import { Meteor } from 'meteor/meteor'
 
 // Modules
+import ChatCtrl from '../controllers/chat.controller'
 import ChatsCtrl from '../controllers/chats.controller'
-import CalendarFilter from '../filters/calenda.filter'
+import InputDirective from '../directives/input.directive'
+import CalendarFilter from '../filters/calendar.filter'
 import RoutesConfig from '../routes'
 
 const App = 'Willchat'
@@ -20,10 +22,16 @@ const App = 'Willchat'
 // App
 Angular.module(App, [
 	'angular-meteor',
+	'angularMoment',
 	'ionic'
 ])
 
-new Loader(App).load(RoutesConfig).load(RoutesConfig).load(CalendarFilter)
+new Loader(App)
+	.load(ChatCtrl)
+	.load(ChatsCtrl)
+	.load(InputDirective)
+	.load(CalendarFilter)
+	.load(RoutesConfig)
 
 // Startup
 if (Meteor.isCordova) {
